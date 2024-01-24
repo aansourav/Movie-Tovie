@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import moon from "../../assets/icons/moon.svg";
 import logo from "../../assets/logo.svg";
 import ring from "../../assets/ring.svg";
 import shoppingCart from "../../assets/shopping-cart.svg";
+import { MovieContext } from "../../context";
 import Cart from "./Cart";
 
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
 
+  const { cartData } = useContext(MovieContext);
 
   const handleCartShow = () => {
-    setShowCart(true)
-  }
+    setShowCart(true);
+  };
 
   return (
     <header>
-      {showCart && <Cart onCartCancel={()=>setShowCart(false)} />}
+      {showCart && <Cart onCartCancel={() => setShowCart(false)} />}
       <nav className="container flex items-center justify-between space-x-10 py-6">
         <a href="index.html">
           <img src={logo} height="26" alt="" />
@@ -45,6 +47,11 @@ const Header = () => {
               href="/"
             >
               <img src={shoppingCart} width="24" height="24" alt="" />
+              {cartData.length > 0 && (
+                <span className="rounded-full font-bold text-[13px] absolute top-[-14px] left-[17px] bg-[#12CF6F] text-white  p-[2px] w-[35px] h-[22px]">
+                  {cartData.length}
+                </span>
+              )}
             </button>
           </li>
         </ul>

@@ -10,7 +10,7 @@ import Cart from "./Cart";
 const Header = () => {
   const [showCart, setShowCart] = useState(false);
   const { darkMode, setDarkMode } = useContext(ThemeContext);
-  const { cartData } = useContext(MovieContext);
+  const { state } = useContext(MovieContext);
 
   const handleCartShow = () => {
     setShowCart(true);
@@ -44,9 +44,9 @@ const Header = () => {
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
             >
               <img src={shoppingCart} width="24" height="24" alt="" />
-              {cartData.length > 0 && (
+              {state.cartData.length > 0 && (
                 <span className="rounded-full font-bold text-[13px] absolute top-[-14px] left-[17px] bg-[#12CF6F] text-white  p-[2px] w-[35px] h-[22px]">
-                  {cartData.length}
+                  {state.cartData.length}
                 </span>
               )}
             </button>

@@ -20,7 +20,7 @@ const CartItem = ({ movie, onRemoveItem }) => {
       <div className="flex justify-between gap-4 items-center">
         <button
           className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-          onClick={() => onRemoveItem(movie.id)}
+          onClick={() => onRemoveItem(movie)}
         >
           <img className="w-5 h-5" src={deleteIcon} alt="" />
           <span className="max-md:hidden">Remove</span>

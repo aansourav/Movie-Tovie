@@ -12,13 +12,18 @@ const MovieCard = ({ movie }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const image = getImgUrl(cover);
 
-  const { cartData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
 
   const handleAddToCart = (e, movie) => {
     e.stopPropagation();
-    const found = cartData.find((item) => item.id === movie.id);
+    const found = state.cartData.find((item) => item.id === movie.id);
     if (!found) {
-      setCartData([...cartData, movie]);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          ...movie
+        }
+      })
     } else {
       console.error("This movie has already been added");
     }

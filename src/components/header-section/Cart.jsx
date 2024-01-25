@@ -4,10 +4,14 @@ import { MovieContext } from "../../context";
 import CartItem from "./CartItem";
 
 const Cart = ({ onCartCancel }) => {
-  const { cartData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
 
-  const handleRemoveItem = (movieId) => {
-    setCartData(cartData.filter((movie) => movie.id !== movieId));
+  const handleRemoveItem = (movie) => {
+    // setCartData(cartData.filter((movie) => movie.id !== movieId));
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: { ...movie },
+    });
   };
 
   return (
@@ -16,11 +20,12 @@ const Cart = ({ onCartCancel }) => {
         <div className="bg-white shadow-md dark:bg-[#12141D] rounded-2xl overflow-hidden p-5 md:p-9">
           <h2 className="text-2xl lg:text-[30px] mb-10 font-bold">Your Carts</h2>
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
-            {cartData.length === 0 ? (
-              <p className="text-2xl text-center" >Cart is empty!</p>
+            {state.cartData.length === 0 ? (
+              <p className="text-2xl text-center">Cart is empty!</p>
             ) : (
-              cartData.map((movie) => (
+              state.cartData.map((movie) => (
                 <CartItem key={movie.id} movie={movie} onRemoveItem={handleRemoveItem} />
+
               ))
             )}
           </div>

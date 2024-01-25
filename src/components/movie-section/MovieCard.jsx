@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import tagIcon from "../../assets/tag.svg";
 import { MovieContext } from "../../context";
 import { getImgUrl } from "../../utils/movie-utility";
@@ -21,11 +22,16 @@ const MovieCard = ({ movie }) => {
       dispatch({
         type: "ADD_TO_CART",
         payload: {
-          ...movie
-        }
-      })
+          ...movie,
+        },
+      });
+      toast.success(`Added  ${movie.title} to Cart!`, {
+        position: "top-center",
+      });
     } else {
-      console.error("This movie has already been added");
+      toast.error(`The movie ${movie.title} has been added to the cart already`, {
+        position: "top-center",
+      });
     }
   };
 
